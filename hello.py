@@ -1,4 +1,4 @@
-from flask import Flask, redirect, url_for, request, render_template
+from flask import Flask, redirect, url_for, request, render_template, jsonify
 
 import os
 app = Flask(__name__)
@@ -47,7 +47,22 @@ def postResult():
 @app.route('/result', methods=['GET'])
 def getFormData():
       return app.send_static_file('hello.html')
-     
+
+# return json result
+@app.route('/users', methods=['GET'])
+def getUsersList():
+      return jsonify([{'name':'arvind','age':2}]);
+          
+
+
+# return json result
+def getStudentsList():
+      return jsonify([{'studentname':'arvind','age':2}]);
+          
+#maps to the url /students
+app.add_url_rule('/students','getStudentsList', getStudentsList);         
+
+
 
 if __name__ == "__main__":
   app.run()
